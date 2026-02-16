@@ -1,13 +1,8 @@
-# Maven
-# Build your Java project and run tests with Apache Maven.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
-
 trigger:
 - master
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
 steps:
 - task: Maven@3
@@ -20,12 +15,12 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
-    
-  - task: TomcatDeployment@1
-    inputs:
-      TomcatUrl: 'http://98.81.189.12:8080/'
-      Username: 'tomcat'
-      Password: 'tomcat'
-      Warfile: 'target/Cloud-1.0-SNAPSHOT'
-      Context: '/webapp'
-      ServerVersion: '7OrAbove'
+
+- task: TomcatDeployment@1
+  inputs:
+    TomcatUrl: 'http://98.81.189.12:8080/'
+    Username: 'tomcat'
+    Password: 'tomcat'
+    Warfile: 'target/Cloud-1.0-SNAPSHOT.war'
+    Context: '/webapp'
+    ServerVersion: '7OrAbove'
