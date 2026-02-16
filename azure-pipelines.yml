@@ -21,4 +21,11 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
     
-  
+  - task: TomcatDeployment@1
+    inputs:
+      TomcatUrl: 'http://98.81.189.12:8080/'
+      Username: 'tomcat'
+      Password: 'tomcat'
+      Warfile: 'target/Cloud-1.0-SNAPSHOT'
+      Context: '/webapp'
+      ServerVersion: '7OrAbove'
